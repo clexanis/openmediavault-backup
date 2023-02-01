@@ -29,30 +29,6 @@ data:
             - ["fsarchiver", _("fsarchiver")]
             - ["borg", _("borgbackup")]
             - ["rsync", _("rsync")]
-      - type: textInput
-        name: root
-        label: _("Root device")
-        value: ""
-        hint: _("For advanced users only - Do not use unless exact root device is known.")
-      - type: textInput
-        name: extraoptions
-        label: _("Extra options")
-        value: ""
-        hint: _("To exclude addition directories, add --exclude= before each directory and separate additional entries with a space. Example<br />--exclude=/pool --exclude=/test<br />Warning!!  You can break the backup with wrong options.")
-        modifiers:
-          - type: visible
-            constraint:
-              operator: and
-              arg0:
-                operator: ne
-                arg0:
-                  prop: method
-                arg1: "dd"
-              arg1:
-                operator: ne
-                arg0:
-                  prop: method
-                arg1: "ddfull"
       - type: numberInput
         name: keep
         label: _("Keep")
@@ -92,6 +68,34 @@ data:
                 arg0:
                   prop: method
                 arg1: "fsarchiver"
+      # Divider, to make clear that following options can be dangerous.
+      - type: divider
+        title: "Advanced options, please let them empty unless you know what you're doing!"
+      # Advanced options that most users shouldn't use.
+      - type: textInput
+        name: root
+        label: _("Root device")
+        value: ""
+        hint: _("For advanced users only - Do not use unless exact root device is known.")
+      - type: textInput
+        name: extraoptions
+        label: _("Extra options")
+        value: ""
+        hint: _("To exclude addition directories, add --exclude= before each directory and separate additional entries with a space. Example<br />--exclude=/pool --exclude=/test<br />Warning!!  You can break the backup with wrong options.")
+        modifiers:
+          - type: visible
+            constraint:
+              operator: and
+              arg0:
+                operator: ne
+                arg0:
+                  prop: method
+                arg1: "dd"
+              arg1:
+                operator: ne
+                arg0:
+                  prop: method
+                arg1: "ddfull"
     buttons:
       - template: submit
       - template: cancel
