@@ -3,11 +3,20 @@ on: [pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: 'Check out the repo'
+        id: checkout
         uses: actions/checkout@v3
       - name: 'Build package'
-        uses: jtdor/build-deb-action@v1
+        id: build
+        uses: jtdor/build-deb-action@v1.5.0
         with:
           buildpackage-opts: -us -uc
           docker-image: debian:bullseye-slim
+      - name: 'Upload artifacts'
+        id: upload
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          path: debian/artifacts
