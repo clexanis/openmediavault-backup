@@ -1,0 +1,13 @@
+name: 'Build a test package'
+on: [pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Check out the repo'
+        uses: actions/checkout@v3
+      - name: 'Build package'
+        uses: jtdor/build-deb-action@v1
+        with:
+          buildpackage-opts: -us -uc
+          docker-image: debian:bullseye-slim
