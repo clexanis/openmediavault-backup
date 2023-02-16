@@ -1,0 +1,5 @@
+root@4570:~# dd if=/dev/zero of=/dev/null bs=1M conv=sync,noerror count=40960 status=progress
+41156608000 bytes (41 GB, 38 GiB) copied, 20 s, 2.1 GB/s
+40960+0 records in
+40960+0 records out
+42949672960 bytes (43 GB, 40 GiB) copied, 20.8705 s, 2.1 GB/s

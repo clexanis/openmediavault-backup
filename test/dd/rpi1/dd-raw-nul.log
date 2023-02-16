@@ -1,0 +1,9 @@
+root@rpi1:~ # time dd if=/dev/mmcblk0 of=/dev/null bs=1M conv=sync,noerror status=progress
+2026897408 bytes (2.0 GB, 1.9 GiB) copied, 174 s, 11.6 MB/s
+1938+1 records in
+1939+0 records out
+2033188864 bytes (2.0 GB, 1.9 GiB) copied, 174.539 s, 11.6 MB/s
+
+real    2m54.662s
+user    0m1.604s
+sys     0m17.689s

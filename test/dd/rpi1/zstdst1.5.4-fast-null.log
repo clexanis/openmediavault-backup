@@ -1,0 +1,33 @@
+root@rpi1:~ # /usr/local/src/zstd/build/cmake/programs/zstd --version
+*** Zstandard CLI (32-bit) v1.5.4, by Yann Collet ***
+root@rpi1:~ # time ./zstdst1.5.4-fast-null.sh
+Starting backup...
+Method: ddfull
+Device file:  /dev/root
+Root drive: /dev/mmcblk0
+Save fdisk output for /dev/mmcblk0
+Save blkid output
+Save package list
+Partition type :: dos
+Save mbr
+1+0 records in
+1+0 records out
+446 bytes copied, 0,0062689 s, 71,1 kB/s
+Save mbr and partition table
+1+0 records in
+1+0 records out
+512 bytes copied, 0,00615991 s, 83,1 kB/s
+Boot drive: /dev/mmcblk0p1
+Starting dd full disk...
+2024800256 bytes (2,0 GB, 1,9 GiB) copied, 329 s, 6,2 MB/s
+1938+1 records in
+1939+0 records out
+2033188864 bytes (2,0 GB, 1,9 GiB) copied, 329,996 s, 6,2 MB/s
+dd exit code = 0
+/usr/local/src/zstd/build/cmake/programs/zstd --single-thread exit code = 0
+dd full disk backup complete.
+Backup complete.
+
+real    5m32,377s
+user    4m4,425s
+sys     0m45,633s

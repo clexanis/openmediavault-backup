@@ -1,0 +1,57 @@
+root@4570:~# gzip --version
+gzip 1.10
+Copyright (C) 2018 Free Software Foundation, Inc.
+Copyright (C) 1993 Jean-loup Gailly.
+This is free software.  You may redistribute copies of it under the terms of
+the GNU General Public License <https://www.gnu.org/licenses/gpl.html>.
+There is NO WARRANTY, to the extent permitted by law.
+
+Written by Jean-loup Gailly.
+root@4570:~# time omv-backup
+[2023-02-16 22:46:25+0100] [backup] Starting backup...
+[2023-02-16 22:46:25+0100] [backup] Create //srv/tmpfs/omvbackup
+[2023-02-16 22:46:25+0100] [backup] Method: ddfull
+[2023-02-16 22:46:25+0100] [backup] Device file:  /dev/sda2
+[2023-02-16 22:46:25+0100] [backup] Root drive: /dev/sda
+[2023-02-16 22:46:25+0100] [backup] Save fdisk output for /dev/sda
+[2023-02-16 22:46:25+0100] [backup] Save blkid output
+[2023-02-16 22:46:25+0100] [backup] Save package list
+[2023-02-16 22:46:25+0100] [backup] Partition type :: gpt
+[2023-02-16 22:46:25+0100] [backup] ESP partition :: /dev/sda1
+[2023-02-16 22:46:25+0100] [backup] Backup ESP partition
+444596224 bytes (445 MB, 424 MiB) copied, 3 s, 148 MB/s
+512+0 records in
+512+0 records out
+536870912 bytes (537 MB, 512 MiB) copied, 3,58139 s, 150 MB/s
+[2023-02-16 22:46:29+0100] [backup] Save mbr
+1+0 records in
+1+0 records out
+446 bytes copied, 0,00023683 s, 1,9 MB/s
+[2023-02-16 22:46:29+0100] [backup] Save mbr and partition table
+1+0 records in
+1+0 records out
+1408 bytes (1,4 kB, 1,4 KiB) copied, 0,000248106 s, 5,7 MB/s
+[2023-02-16 22:46:29+0100] [backup] Starting dd full disk...
+21339570176 bytes (21 GB, 20 GiB) copied, 340 s, 62,8 MB/s
+20480+0 records in
+20480+0 records out
+21474836480 bytes (21 GB, 20 GiB) copied, 340,96 s, 63,0 MB/s
+[2023-02-16 22:52:10+0100] [backup] dd exit code = 0
+[2023-02-16 22:52:10+0100] [backup] gzip exit code = 0
+[2023-02-16 22:52:10+0100] [backup] dd full disk backup complete.
+[2023-02-16 22:52:10+0100] [backup] keep days :: 0
+[2023-02-16 22:52:10+0100] [backup] Purging disabled.
+[2023-02-16 22:52:10+0100] [backup] Backup complete.
+
+real    5m45,234s
+user    3m25,872s
+sys     2m47,795s
+root@4570:~# ls -l /srv/tmpfs/omvbackup/
+total 2093232
+-rw-r--r-- 1 root root        572 16 févr. 22:46 backup-omv-2023-02-16_22-46-25.blkid
+-rw-r--r-- 1 root root 2142881049 16 févr. 22:52 backup-omv-2023-02-16_22-46-25.ddfull.gz
+-rw-r--r-- 1 root root     562403 16 févr. 22:46 backup-omv-2023-02-16_22-46-25.espdd.gz
+-rw-r--r-- 1 root root        525 16 févr. 22:46 backup-omv-2023-02-16_22-46-25.fdisk
+-rw-r--r-- 1 root root        446 16 févr. 22:46 backup-omv-2023-02-16_22-46-25.grub
+-rw-r--r-- 1 root root       1408 16 févr. 22:46 backup-omv-2023-02-16_22-46-25.grubparts
+-rw-r--r-- 1 root root       1109 16 févr. 22:46 backup-omv-2023-02-16_22-46-25.packages

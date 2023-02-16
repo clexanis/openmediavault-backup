@@ -1,0 +1,36 @@
+root@rpi1:/home/pi# zstd --version
+*** zstd command line interface 32-bits v1.4.8, by Yann Collet ***
+root@rpi1:/home/pi# time ./rpi
+rpi1-zstdst-fast-null.sh  rpi-gzip-fast-null.sh     rpi-pigz-fast-null.sh.1
+rpi-default-null.sh       rpi-pigz-fast-null.sh
+root@rpi1:/home/pi# time ./rpi1-zstdst-fast-null.sh
+Starting backup...
+Method: ddfull
+Device file:  /dev/root
+Root drive: /dev/mmcblk0
+Save fdisk output for /dev/mmcblk0
+Save blkid output
+Save package list
+Partition type :: dos
+Save mbr
+1+0 records in
+1+0 records out
+446 bytes copied, 0,0139158 s, 32,0 kB/s
+Save mbr and partition table
+1+0 records in
+1+0 records out
+512 bytes copied, 0,00659389 s, 77,6 kB/s
+Boot drive: /dev/mmcblk0p1
+Starting dd full disk...
+2028994560 bytes (2,0 GB, 1,9 GiB) copied, 370 s, 5,5 MB/s
+1938+1 records in
+1939+0 records out
+2033188864 bytes (2,0 GB, 1,9 GiB) copied, 370,725 s, 5,5 MB/s
+dd exit code = 0
+zstd --single-thread exit code = 0
+dd full disk backup complete.
+Backup complete.
+
+real    6m13,150s
+user    3m44,086s
+sys     0m42,872s

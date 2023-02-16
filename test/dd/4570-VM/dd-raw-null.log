@@ -1,0 +1,9 @@
+root@4570:~# time dd if=/dev/sda of=/dev/null bs=1M conv=sync,noerror status=progress
+21091057664 bytes (21 GB, 20 GiB) copied, 44 s, 479 MB/s
+20480+0 records in
+20480+0 records out
+21474836480 bytes (21 GB, 20 GiB) copied, 44,5676 s, 482 MB/s
+
+real    0m44,571s
+user    0m0,281s
+sys     0m26,929s

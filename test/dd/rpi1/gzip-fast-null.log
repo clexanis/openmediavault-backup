@@ -1,0 +1,31 @@
+root@rpi1:/home/pi# time ./gzip-fast-null.sh
+Starting backup...
+Method: ddfull
+Device file:  /dev/root
+Root drive: /dev/mmcblk0
+Save fdisk output for /dev/mmcblk0
+Save blkid output
+Save package list
+Partition type :: dos
+Save mbr
+1+0 records in
+1+0 records out
+446 bytes copied, 0,0137888 s, 32,3 kB/s
+Save mbr and partition table
+1+0 records in
+1+0 records out
+512 bytes copied, 0,0063919 s, 80,1 kB/s
+Boot drive: /dev/mmcblk0p1
+Starting dd full disk...
+2032140288 bytes (2,0 GB, 1,9 GiB) copied, 903 s, 2,2 MB/s
+1938+1 records in
+1939+0 records out
+2033188864 bytes (2,0 GB, 1,9 GiB) copied, 903,885 s, 2,2 MB/s
+dd exit code = 0
+gzip exit code = 0
+dd full disk backup complete.
+Backup complete.
+
+real    15m6,178s
+user    13m0,028s
+sys     0m53,363s

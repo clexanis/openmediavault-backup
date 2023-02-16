@@ -1,0 +1,18 @@
+VM in VMWare Workstation 17.0.1
+vmware-vmx excluded in Microsoft Defender
+
+Host
+Intel Core i5 4570
+12 G RAM
+SSD
+
+VM
+Memory 4096
+Processor 4 core
+	Virtualize Intel VT-x/EPT or AMD-V/RVI
+	Virtualize CPU performance counters
+Drive 20G SATA
+UEFI
+Time sync on
+
+target directory on tmpfs

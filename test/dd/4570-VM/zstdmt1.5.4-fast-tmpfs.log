@@ -1,0 +1,50 @@
+root@4570:~# /usr/local/src/zstd/build/cmake/programs/zstd --version
+*** Zstandard CLI (64-bit) v1.5.4, by Yann Collet ***
+root@4570:~# time ./zstdmt1.5.4-fast-tmpfs.sh
+[2023-02-16 23:51:23+0100] [backup] Starting backup...
+[2023-02-16 23:51:23+0100] [backup] Create //srv/tmpfs/omvbackup
+[2023-02-16 23:51:23+0100] [backup] Method: ddfull
+[2023-02-16 23:51:23+0100] [backup] Device file:  /dev/sda2
+[2023-02-16 23:51:23+0100] [backup] Root drive: /dev/sda
+[2023-02-16 23:51:23+0100] [backup] Save fdisk output for /dev/sda
+[2023-02-16 23:51:23+0100] [backup] Save blkid output
+[2023-02-16 23:51:23+0100] [backup] Save package list
+[2023-02-16 23:51:23+0100] [backup] Partition type :: gpt
+[2023-02-16 23:51:26+0100] [backup] ESP partition :: /dev/sda1
+[2023-02-16 23:51:26+0100] [backup] Backup ESP partition
+331350016 bytes (331 MB, 316 MiB) copied, 1 s, 330 MB/s
+512+0 records in
+512+0 records out
+536870912 bytes (537 MB, 512 MiB) copied, 1.63158 s, 329 MB/s
+[2023-02-16 23:51:27+0100] [backup] Save mbr
+1+0 records in
+1+0 records out
+446 bytes copied, 8.3648e-05 s, 5.3 MB/s
+[2023-02-16 23:51:27+0100] [backup] Save mbr and partition table
+1+0 records in
+1+0 records out
+1408 bytes (1.4 kB, 1.4 KiB) copied, 8.759e-05 s, 16.1 MB/s
+[2023-02-16 23:51:27+0100] [backup] Starting dd full disk...
+21143486464 bytes (21 GB, 20 GiB) copied, 72 s, 294 MB/s
+20480+0 records in
+20480+0 records out
+21474836480 bytes (21 GB, 20 GiB) copied, 72.9373 s, 294 MB/s
+[2023-02-16 23:52:40+0100] [backup] dd exit code = 0
+[2023-02-16 23:52:40+0100] [backup] /usr/local/src/zstd/build/cmake/programs/zstd -T0 --fast exit code = 0
+[2023-02-16 23:52:40+0100] [backup] dd full disk backup complete.
+[2023-02-16 23:52:40+0100] [backup] keep days :: 0
+[2023-02-16 23:52:40+0100] [backup] Purging disabled.
+[2023-02-16 23:52:40+0100] [backup] Backup complete.
+
+real    1m17.554s
+user    0m18.803s
+sys     1m15.139s
+root@4570:~# ls -l /srv/tmpfs/omvbackup/
+total 2321144
+-rw-r--r-- 1 root root        572 Feb 16 23:51 backup-omv-2023-02-16_23-51-23.blkid
+-rw-r--r-- 1 root root 2376757672 Feb 16 23:52 backup-omv-2023-02-16_23-51-23.ddfull.gz
+-rw-r--r-- 1 root root      67484 Feb 16 23:51 backup-omv-2023-02-16_23-51-23.espdd.gz
+-rw-r--r-- 1 root root        525 Feb 16 23:51 backup-omv-2023-02-16_23-51-23.fdisk
+-rw-r--r-- 1 root root        446 Feb 16 23:51 backup-omv-2023-02-16_23-51-23.grub
+-rw-r--r-- 1 root root       1408 Feb 16 23:51 backup-omv-2023-02-16_23-51-23.grubparts
+-rw-r--r-- 1 root root       1109 Feb 16 23:51 backup-omv-2023-02-16_23-51-23.packages

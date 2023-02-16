@@ -1,0 +1,4 @@
+root@4570:~# dd if=/dev/zero of=/srv/tmpfs/tmp.img bs=1M conv=sync,noerror count=2048
+2048+0 records in
+2048+0 records out
+2147483648 bytes (2.1 GB, 2.0 GiB) copied, 3.01477 s, 712 MB/s

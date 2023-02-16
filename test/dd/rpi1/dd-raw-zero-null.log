@@ -1,0 +1,5 @@
+root@rpi1:~ # dd if=/dev/zero of=/dev/null bs=1M conv=sync,noerror count=20480 status=progress
+17900240896 bytes (18 GB, 17 GiB) copied, 27 s, 663 MB/s^C
+17084+0 records in
+17084+0 records out
+17913872384 bytes (18 GB, 17 GiB) copied, 27.0325 s, 663 MB/s

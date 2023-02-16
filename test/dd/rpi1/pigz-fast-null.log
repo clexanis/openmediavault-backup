@@ -1,0 +1,33 @@
+root@rpi1:/home/pi# pigz --version
+pigz 2.6
+root@rpi1:/home/pi# time ./pigz-fast-null.sh
+Starting backup...
+Method: ddfull
+Device file:  /dev/root
+Root drive: /dev/mmcblk0
+Save fdisk output for /dev/mmcblk0
+Save blkid output
+Save package list
+Partition type :: dos
+Save mbr
+1+0 records in
+1+0 records out
+446 bytes copied, 0,0151527 s, 29,4 kB/s
+Save mbr and partition table
+1+0 records in
+1+0 records out
+512 bytes copied, 0,0060989 s, 83,9 kB/s
+Boot drive: /dev/mmcblk0p1
+Starting dd full disk...
+2032140288 bytes (2,0 GB, 1,9 GiB) copied, 761 s, 2,7 MB/s
+1938+1 records in
+1939+0 records out
+2033188864 bytes (2,0 GB, 1,9 GiB) copied, 761,931 s, 2,7 MB/s
+dd exit code = 0
+pigz exit code = 0
+dd full disk backup complete.
+Backup complete.
+
+real    12m43,703s
+user    10m52,927s
+sys     0m45,120s

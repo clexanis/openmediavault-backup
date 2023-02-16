@@ -1,0 +1,50 @@
+root@4570:~# pigz --version
+pigz 2.6
+root@4570:~# time ./pigz-fast-null.sh
+[2023-02-16 23:13:35+0100] [backup] Starting backup...
+[2023-02-16 23:13:35+0100] [backup] Create //srv/tmpfs/omvbackup
+[2023-02-16 23:13:35+0100] [backup] Method: ddfull
+[2023-02-16 23:13:35+0100] [backup] Device file:  /dev/sda2
+[2023-02-16 23:13:35+0100] [backup] Root drive: /dev/sda
+[2023-02-16 23:13:35+0100] [backup] Save fdisk output for /dev/sda
+[2023-02-16 23:13:35+0100] [backup] Save blkid output
+[2023-02-16 23:13:35+0100] [backup] Save package list
+[2023-02-16 23:13:35+0100] [backup] Partition type :: gpt
+[2023-02-16 23:13:38+0100] [backup] ESP partition :: /dev/sda1
+[2023-02-16 23:13:38+0100] [backup] Backup ESP partition
+394264576 bytes (394 MB, 376 MiB) copied, 1 s, 393 MB/s
+512+0 records in
+512+0 records out
+536870912 bytes (537 MB, 512 MiB) copied, 1,36648 s, 393 MB/s
+[2023-02-16 23:13:39+0100] [backup] Save mbr
+1+0 records in
+1+0 records out
+446 bytes copied, 0,000259977 s, 1,7 MB/s
+[2023-02-16 23:13:39+0100] [backup] Save mbr and partition table
+1+0 records in
+1+0 records out
+1408 bytes (1,4 kB, 1,4 KiB) copied, 0,00021905 s, 6,4 MB/s
+[2023-02-16 23:13:39+0100] [backup] Starting dd full disk...
+21394096128 bytes (21 GB, 20 GiB) copied, 97 s, 221 MB/s
+20480+0 records in
+20480+0 records out
+21474836480 bytes (21 GB, 20 GiB) copied, 97,3078 s, 221 MB/s
+[2023-02-16 23:15:17+0100] [backup] dd exit code = 0
+[2023-02-16 23:15:17+0100] [backup] pigz --fast exit code = 0
+[2023-02-16 23:15:17+0100] [backup] dd full disk backup complete.
+[2023-02-16 23:15:17+0100] [backup] keep days :: 0
+[2023-02-16 23:15:17+0100] [backup] Purging disabled.
+[2023-02-16 23:15:17+0100] [backup] Backup complete.
+
+real    1m41,760s
+user    1m53,689s
+sys     2m3,653s
+root@4570:~# ls -l /srv/tmpfs/omvbackup/
+total 2273512
+-rw-r--r-- 1 root root        572 16 févr. 23:13 backup-omv-2023-02-16_23-13-35.blkid
+-rw-r--r-- 1 root root 2325586405 16 févr. 23:15 backup-omv-2023-02-16_23-13-35.ddfull.gz
+-rw-r--r-- 1 root root    2463102 16 févr. 23:13 backup-omv-2023-02-16_23-13-35.espdd.gz
+-rw-r--r-- 1 root root        525 16 févr. 23:13 backup-omv-2023-02-16_23-13-35.fdisk
+-rw-r--r-- 1 root root        446 16 févr. 23:13 backup-omv-2023-02-16_23-13-35.grub
+-rw-r--r-- 1 root root       1408 16 févr. 23:13 backup-omv-2023-02-16_23-13-35.grubparts
+-rw-r--r-- 1 root root       1109 16 févr. 23:13 backup-omv-2023-02-16_23-13-35.packages

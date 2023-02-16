@@ -1,0 +1,40 @@
+root@rpi1:~ # gzip --version
+gzip 1.10
+Copyright (C) 2018 Free Software Foundation, Inc.
+Copyright (C) 1993 Jean-loup Gailly.
+This is free software.  You may redistribute copies of it under the terms of
+the GNU General Public License <https://www.gnu.org/licenses/gpl.html>.
+There is NO WARRANTY, to the extent permitted by law.
+
+Written by Jean-loup Gailly.
+root@rpi1:/home/pi# time ./default-null.sh
+Starting backup...
+Method: ddfull
+Device file:  /dev/root
+Root drive: /dev/mmcblk0
+Save fdisk output for /dev/mmcblk0
+Save blkid output
+Save package list
+Partition type :: dos
+Save mbr
+1+0 records in
+1+0 records out
+446 bytes copied, 0,0064229 s, 69,4 kB/s
+Save mbr and partition table
+1+0 records in
+1+0 records out
+512 bytes copied, 0,0064999 s, 78,8 kB/s
+Boot drive: /dev/mmcblk0p1
+Starting dd full disk...
+2033188864 bytes (2,0 GB, 1,9 GiB) copied, 1881 s, 1,1 MB/s
+1938+1 records in
+1939+0 records out
+2033188864 bytes (2,0 GB, 1,9 GiB) copied, 1880,62 s, 1,1 MB/s
+dd exit code = 0
+gzip exit code = 0
+dd full disk backup complete.
+Backup complete.
+
+real    31m21,737s
+user    29m33,509s
+sys     0m52,162s
