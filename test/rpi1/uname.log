@@ -1,0 +1,2 @@
+root@rpi1:~ $ uname -a
+Linux rpi1 5.15.84+ #1613 Thu Jan 5 11:58:09 GMT 2023 armv6l GNU/Linux
