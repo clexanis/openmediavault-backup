@@ -1,0 +1,4 @@
+root@neoverse:~# dd if=/dev/zero of=/srv/tmpfs/tmp.img bs=1M conv=sync,noerror count=4096
+4096+0 records in
+4096+0 records out
+4294967296 bytes (4.3 GB, 4.0 GiB) copied, 1.57246 s, 2.7 GB/s

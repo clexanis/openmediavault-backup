@@ -1,0 +1,5 @@
+root@neoverse:~# dd if=/dev/zero of=/dev/null bs=1M conv=sync,noerror count=204800 status=progress
+207926329344 bytes (208 GB, 194 GiB) copied, 12 s, 17.3 GB/s
+204800+0 records in
+204800+0 records out
+214748364800 bytes (215 GB, 200 GiB) copied, 12.3907 s, 17.3 GB/s

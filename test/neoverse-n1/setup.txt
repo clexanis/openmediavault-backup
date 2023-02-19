@@ -1,0 +1,6 @@
+VM in OCI
+
+VM
+Memory 24G
+Processor 4 core Ampere Neoverse-N1 r3p1
+Drive 50G
