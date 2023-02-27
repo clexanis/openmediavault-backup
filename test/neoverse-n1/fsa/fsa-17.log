@@ -1,0 +1,45 @@
+root@neoverse:~# time fsarchiver savefs -oA -Z 17 -j 4 /srv/tmpfs/fsa.fsa /dev/sda1 /dev/mapper/internal-root
+Statistics for filesystem 0
+* files successfully processed:....regfiles=9, directories=4, symlinks=0, hardlinks=0, specials=0
+* files with errors:...............regfiles=0, directories=0, symlinks=0, hardlinks=0, specials=0
+Statistics for filesystem 1
+* files successfully processed:....regfiles=118313, directories=30167, symlinks=11644, hardlinks=63, specials=71
+* files with errors:...............regfiles=0, directories=0, symlinks=0, hardlinks=0, specials=0
+
+real    5m6.830s
+user    19m33.657s
+sys     0m11.171s
+root@neoverse:~# fsarchiver archinfo /srv/tmpfs/fsa.fsa
+====================== archive information ======================
+Archive type:                   filesystems
+Filesystems count:              2
+Archive id:                     63f6ca41
+Archive file format:            FsArCh_002
+Archive created with:           0.8.6
+Archive creation date:          2023-02-27_21-55-56
+Archive label:                  <none>
+Minimum fsarchiver version:     0.6.4.0
+Compression level:              17 (zstd level 17)
+Encryption algorithm:           none
+
+===================== filesystem information ====================
+Filesystem id in archive:       0
+Filesystem format:              vfat
+Filesystem label:               NO NAME
+Filesystem uuid:                9FCB211D
+Original device:                /dev/sda1
+Original filesystem size:       299.40 MB (313942016 bytes)
+Space used in filesystem:       8.44 MB (8851456 bytes)
+
+===================== filesystem information ====================
+Filesystem id in archive:       1
+Filesystem format:              xfs
+Filesystem label:
+Filesystem uuid:                6168ea6d-9d9b-4e3b-bb1e-0fe1591e95d9
+Original device:                /dev/mapper/internal-root
+Original filesystem size:       46.69 GB (50136612864 bytes)
+Space used in filesystem:       11.16 GB (11979788288 bytes)
+
+root@neoverse:~# ls -l /srv/tmpfs/
+total 8195216
+-rw-r--r-- 1 root root 8391900562 Feb 27 22:01 fsa.fsa

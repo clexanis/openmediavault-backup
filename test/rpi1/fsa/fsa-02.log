@@ -1,0 +1,11 @@
+root@rpi1:~ # time fsarchiver savefs -oA -Z 2 /srv/nullfs/fsa.fsa /dev/mmcblk0p1 /dev/mmcblk0p2
+Statistics for filesystem 0
+* files successfully processed:....regfiles=328, directories=3, symlinks=0, hardlinks=0, specials=0
+* files with errors:...............regfiles=0, directories=0, symlinks=0, hardlinks=0, specials=0
+Statistics for filesystem 1
+* files successfully processed:....regfiles=81761, directories=14153, symlinks=5795, hardlinks=373, specials=8
+* files with errors:...............regfiles=0, directories=0, symlinks=0, hardlinks=0, specials=0
+
+real    9m47,853s
+user    5m58,533s
+sys     1m51,533s

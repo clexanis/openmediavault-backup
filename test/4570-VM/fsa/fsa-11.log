@@ -1,0 +1,45 @@
+root@4570:~# time fsarchiver savefs -oA -Z 11 -j 4 /srv/tmpfs/fsa.fsa /dev/sda1 /dev/sda2
+Statistics for filesystem 0
+* files successfully processed:....regfiles=1, directories=3, symlinks=0, hardlinks=0, specials=0
+* files with errors:...............regfiles=0, directories=0, symlinks=0, hardlinks=0, specials=0
+Statistics for filesystem 1
+* files successfully processed:....regfiles=48566, directories=6768, symlinks=3524, hardlinks=10, specials=16
+* files with errors:...............regfiles=0, directories=0, symlinks=0, hardlinks=0, specials=0
+
+real    0m33,667s
+user    1m55,608s
+sys     0m15,197s
+root@4570:~# fsarchiver archinfo /srv/tmpfs/fsa.fsa
+====================== archive information ======================
+Archive type:                   filesystems
+Filesystems count:              2
+Archive id:                     63fabdbb
+Archive file format:            FsArCh_002
+Archive created with:           0.8.6
+Archive creation date:          2023-02-27_21-49-51
+Archive label:                  <none>
+Minimum fsarchiver version:     0.6.4.0
+Compression level:              11 (zstd level 11)
+Encryption algorithm:           none
+
+===================== filesystem information ====================
+Filesystem id in archive:       0
+Filesystem format:              vfat
+Filesystem label:               NO NAME
+Filesystem uuid:                F6613A94
+Original device:                /dev/sda1
+Original filesystem size:       510.98 MB (535801856 bytes)
+Space used in filesystem:       152.00 KB (155648 bytes)
+
+===================== filesystem information ====================
+Filesystem id in archive:       1
+Filesystem format:              ext4
+Filesystem label:
+Filesystem uuid:                42461c03-06b3-432a-bf87-4c127ee1d1e6
+Original device:                /dev/sda2
+Original filesystem size:       18.09 GB (19419447296 bytes)
+Space used in filesystem:       3.09 GB (3319197696 bytes)
+
+root@4570:~# ls -l /srv/tmpfs/
+total 1043348
+-rw-r--r-- 1 root root 1068388243 Feb 27 21:50 fsa.fsa
