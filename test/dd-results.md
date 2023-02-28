@@ -1,8 +1,8 @@
-# Result
+# dd Result
 
 Here are the results of the tests I've made with different parameters for the compressor and on different configurations.
 
-The platfoms are a Raspberry Pi 1, a type 1 VM using 4 core of a Neoverse-N1 with 24 GB RAM, and a type 2 VM using 4 core of a Intel Core i5-4570 with 8 GB RAM.
+The platforms are a Raspberry Pi 1, a type 1 VM using 4 core of a Neoverse-N1 with 24 GB RAM, and a type 2 VM using 4 core of a Intel Core i5-4570 with 8 GB RAM.
 
 The RPI 1 and the ARM64 VM aren't using OMV, but are all based on Debian system.
 
@@ -19,7 +19,7 @@ The RPI 1 and the ARM64 VM aren't using OMV, but are all based on Debian system.
 
 We could see that changing the profile for gzip give a large speedup on all platform (+100% on the Raspberry Pi 1 !).
 
-As for pigz, which is compatible with the current file format used, we could observe a weird result. Another large speedup on the AMD64 platfom, even a little speedup on the RPI1, but almost none on the ARM64 who have 4 cores. After some search, turn out that the culprit is an old library used on Debian Bookworm [see here](#pigz-issue-on-arm64).
+As for pigz, which is compatible with the current file format used, we could observe a weird result. Another large speedup on the AMD64 platform, even a little speedup on the RPI1, but almost none on the ARM64 who have 4 cores. After some search, turn out that the culprit is an old library used on Debian Bookworm [see here](#pigz-issue-on-arm64).
 
 Zstd give an impressing gain, hitting the ceiling wall imposed by the backing device on higher end target, and the latest version (manually compiled) is even better. Shame it would break the compatibility on the current file format.
 
