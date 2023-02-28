@@ -1,0 +1,20 @@
+# For dd
+EFI image to sda1.dd-img.gz
+image to sda2.dd-img.gz
+Create parts file
+
+> Work with Rescuezilla, but Clonezilla ask for mbr.
+
+# For ddfull
+
+Create disk
+
+
+
+
+EFI image to sda1.dd-img.gz
+image to sda2.dd-img.gz
+.grub to sda-mbr
+! Create parts file
+Create dev-fs.list
+? sfdisk to sda-pt.sf
