@@ -251,7 +251,7 @@ fi
 case ${method} in
     dd)
         _log "Starting dd backup..."
-        dd if=${devicefile} bs=1M conv=sync,noerror status=progress | zstd ${OMV_BACKUP_ZSTD_OPTIONS}-c > "${backupDir}/${OMV_BACKUP_FILE_PREFIX}-${date}.dd.zst"
+        dd if=${devicefile} bs=1M conv=sync,noerror | zstd ${OMV_BACKUP_ZSTD_OPTIONS} -v -c > "${backupDir}/${OMV_BACKUP_FILE_PREFIX}-${date}.dd.zst"
         status=( "${PIPESTATUS[@]}" )
         _log "dd exit code = ${status[0]}"
         _log "zstd ${OMV_BACKUP_ZSTD_OPTIONS}exit code = ${status[1]}"
@@ -264,7 +264,7 @@ case ${method} in
         sync
         if [ -n "${bootpart}" ]; then
             _log "Starting dd backup of boot partition..."
-            dd if=${bootpart} bs=1M conv=sync,noerror status=progress | zstd ${OMV_BACKUP_ZSTD_OPTIONS}-c > "${backupDir}/${OMV_BACKUP_FILE_PREFIX}-${date}_boot.dd.zst"
+            dd if=${bootpart} bs=1M conv=sync,noerror status=progress | zstd ${OMV_BACKUP_ZSTD_OPTIONS} -c > "${backupDir}/${OMV_BACKUP_FILE_PREFIX}-${date}_boot.dd.zst"
             if [ $? -eq 0 ]; then
                 _log "dd backup of boot partition complete."
             else
@@ -279,7 +279,7 @@ case ${method} in
 
     ddfull)
         _log "Starting dd full disk..."
-        dd if=${root} bs=1M conv=sync,noerror status=progress | zstd ${OMV_BACKUP_ZSTD_OPTIONS}-c > "${backupDir}/${OMV_BACKUP_FILE_PREFIX}-${date}.ddfull.zst"
+        dd if=${root} bs=1M conv=sync,noerror | zstd ${OMV_BACKUP_ZSTD_OPTIONS} -v -c > "${backupDir}/${OMV_BACKUP_FILE_PREFIX}-${date}.ddfull.zst"
         status=( "${PIPESTATUS[@]}" )
         _log "dd exit code = ${status[0]}"
         _log "zstd ${OMV_BACKUP_ZSTD_OPTIONS}exit code = ${status[1]}"
