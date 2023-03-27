@@ -17,7 +17,6 @@
 declare -i esp=0
 
 # TODO: Use Salt instead
-OMV_BACKUP_FSA_COMP_LEVEL=${OMV_BACKUP_FSA_COMP_LEVEL:-"2"}
 threads=$(nproc --all)
 
 # logging location
