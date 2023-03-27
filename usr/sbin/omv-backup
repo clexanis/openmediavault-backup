@@ -153,15 +153,11 @@ else
     _log_warning "Save of package list failed!"
 fi
 
+# TODO: Use Salt instead
 # zstd options
 if [ -z "${OMV_BACKUP_ZSTD_OPTIONS}" ]; then
-	memory=$(grep MemAvailable /proc/meminfo | awk '{print $2}')
-	if [ ${OMV_BACKUP_MAX_THREAD} -eq 1 ]; then # Toaster mode!
+	if [ ${threads} -eq 1 ]; then # Toaster mode!
 		OMV_BACKUP_ZSTD_OPTIONS="--fast=5"
-	elif [ ${memory} -gt "$((8*1024*1024))" ]; then
-		OMV_BACKUP_ZSTD_OPTIONS="-T0 --adapt --long=27"
-	elif [ ${memory} -gt "$((4*1024*1024))" ]; then	
-		OMV_BACKUP_ZSTD_OPTIONS="-T0 --adapt --long"
 	else
 		OMV_BACKUP_ZSTD_OPTIONS="-T0 --adapt"
 	fi
