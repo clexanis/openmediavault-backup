@@ -153,6 +153,16 @@ else
     _log_warning "Save of package list failed!"
 fi
 
+# TODO: Use Salt instead
+# zstd options
+if [ -z "${OMV_BACKUP_ZSTD_OPTIONS}" ]; then
+	if [ ${threads} -eq 1 ]; then # Toaster mode!
+		OMV_BACKUP_ZSTD_OPTIONS="--fast=5"
+	else
+		OMV_BACKUP_ZSTD_OPTIONS="-T0 --adapt"
+	fi
+fi
+
 # calculate partition table size to accommodate GPT and MBR.
 part_type=$(blkid -p ${root} | cut -d \" -f4)
 _log "Partition type :: ${part_type}"
@@ -171,7 +181,7 @@ if [ "${part_type}" = "gpt" ]; then
         _log "ESP partition :: ${esppart}"
         if [ -e "${esppart}" ]; then
             _log "Backup ESP partition"
-            dd if=${esppart} bs=1M conv=sync,noerror status=progress | gzip -c > "${backupDir}/${OMV_BACKUP_FILE_PREFIX}-${date}.espdd.gz"
+            dd if=${esppart} bs=1M conv=sync,noerror status=progress | zstd ${OMV_BACKUP_ZSTD_OPTIONS} -c > "${backupDir}/${OMV_BACKUP_FILE_PREFIX}-${date}.espdd.zst"
             if [ $? -eq 0 ]; then
                 _log "Successfully backuped ESP partition"
             else
@@ -237,10 +247,10 @@ fi
 case ${method} in
     dd)
         _log "Starting dd backup..."
-        dd if=${devicefile} bs=1M conv=sync,noerror status=progress | gzip -c > "${backupDir}/${OMV_BACKUP_FILE_PREFIX}-${date}.dd.gz"
+        dd if=${devicefile} bs=1M conv=sync,noerror | zstd ${OMV_BACKUP_ZSTD_OPTIONS} -v -c > "${backupDir}/${OMV_BACKUP_FILE_PREFIX}-${date}.dd.zst"
         status=( "${PIPESTATUS[@]}" )
         _log "dd exit code = ${status[0]}"
-        _log "gzip exit code = ${status[1]}"
+        _log "zstd ${OMV_BACKUP_ZSTD_OPTIONS}exit code = ${status[1]}"
         if [[ ${status[0]} -gt 0 ]] || [[ ${status[1]} -gt 0 ]]; then
             _log_error "dd backup failed!"
             exit 14
@@ -250,7 +260,7 @@ case ${method} in
         sync
         if [ -n "${bootpart}" ]; then
             _log "Starting dd backup of boot partition..."
-            dd if=${bootpart} bs=1M conv=sync,noerror status=progress | gzip -c > "${backupDir}/${OMV_BACKUP_FILE_PREFIX}-${date}_boot.dd.gz"
+            dd if=${bootpart} bs=1M conv=sync,noerror status=progress | zstd ${OMV_BACKUP_ZSTD_OPTIONS} -c > "${backupDir}/${OMV_BACKUP_FILE_PREFIX}-${date}_boot.dd.zst"
             if [ $? -eq 0 ]; then
                 _log "dd backup of boot partition complete."
             else
@@ -259,16 +269,16 @@ case ${method} in
             fi
         fi
         sync
-        touch "${backupDir}/${OMV_BACKUP_FILE_PREFIX}"-${date}*.dd.gz
+        touch "${backupDir}/${OMV_BACKUP_FILE_PREFIX}"-${date}*.dd.zst
         purgeOld
         ;;
 
     ddfull)
         _log "Starting dd full disk..."
-        dd if=${root} bs=1M conv=sync,noerror status=progress | gzip -c > "${backupDir}/${OMV_BACKUP_FILE_PREFIX}-${date}.ddfull.gz"
+        dd if=${root} bs=1M conv=sync,noerror | zstd ${OMV_BACKUP_ZSTD_OPTIONS} -v -c > "${backupDir}/${OMV_BACKUP_FILE_PREFIX}-${date}.ddfull.zst"
         status=( "${PIPESTATUS[@]}" )
         _log "dd exit code = ${status[0]}"
-        _log "gzip exit code = ${status[1]}"
+        _log "zstd ${OMV_BACKUP_ZSTD_OPTIONS}exit code = ${status[1]}"
         if [[ ${status[0]} -gt 0 ]] || [[ ${status[1]} -gt 0 ]]; then
             _log_error "dd full disk backup failed!"
             exit 16
@@ -277,7 +287,7 @@ case ${method} in
         fi
         sync
         sync
-        touch "${backupDir}/${OMV_BACKUP_FILE_PREFIX}"*-${date}.ddfull.gz
+        touch "${backupDir}/${OMV_BACKUP_FILE_PREFIX}"*-${date}.ddfull.zst
         purgeOld
         ;;
 
