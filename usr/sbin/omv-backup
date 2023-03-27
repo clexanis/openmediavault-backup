@@ -16,10 +16,6 @@
 
 declare -i esp=0
 
-OMV_BACKUP_DIR_NAME=${OMV_BACKUP_DIR_NAME:-"omvbackup"}
-OMV_BACKUP_FILE_PREFIX=${OMV_BACKUP_FILE_PREFIX:-"backup-omv"}
-OMV_BACKUP_MAX_DEPTH=${OMV_BACKUP_MAX_DEPTH:-"1"}
-
 # TODO: Use Salt instead
 OMV_BACKUP_FSA_COMP_LEVEL=${OMV_BACKUP_FSA_COMP_LEVEL:-"2"}
 threads=$(nproc --all)
