@@ -250,7 +250,7 @@ case ${method} in
         dd if=${devicefile} bs=1M conv=sync,noerror | zstd ${OMV_BACKUP_ZSTD_OPTIONS} -v -c > "${backupDir}/${OMV_BACKUP_FILE_PREFIX}-${date}.dd.zst"
         status=( "${PIPESTATUS[@]}" )
         _log "dd exit code = ${status[0]}"
-        _log "zstd ${OMV_BACKUP_ZSTD_OPTIONS}exit code = ${status[1]}"
+        _log "zstd exit code = ${status[1]}"
         if [[ ${status[0]} -gt 0 ]] || [[ ${status[1]} -gt 0 ]]; then
             _log_error "dd backup failed!"
             exit 14
@@ -278,7 +278,7 @@ case ${method} in
         dd if=${root} bs=1M conv=sync,noerror | zstd ${OMV_BACKUP_ZSTD_OPTIONS} -v -c > "${backupDir}/${OMV_BACKUP_FILE_PREFIX}-${date}.ddfull.zst"
         status=( "${PIPESTATUS[@]}" )
         _log "dd exit code = ${status[0]}"
-        _log "zstd ${OMV_BACKUP_ZSTD_OPTIONS}exit code = ${status[1]}"
+        _log "zstd exit code = ${status[1]}"
         if [[ ${status[0]} -gt 0 ]] || [[ ${status[1]} -gt 0 ]]; then
             _log_error "dd full disk backup failed!"
             exit 16
