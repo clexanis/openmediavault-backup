@@ -234,7 +234,7 @@ if [ -f "/usr/lib/u-boot/platform_install.sh" ]; then
     . /usr/lib/u-boot/platform_install.sh
     if [ -d "${DIR}" ]; then
         _log "Backup u-boot"
-        tar cjf "${backupDir}/${OMV_BACKUP_FILE_PREFIX}-${date}_u-boot.tar.bz" ${DIR}/*
+        tar cf --zstd "${backupDir}/${OMV_BACKUP_FILE_PREFIX}-${date}_u-boot.tar.zst" ${DIR}/*
         if [ $? -eq 0 ]; then
             _log "Successfully backuped u-boot"
         else
