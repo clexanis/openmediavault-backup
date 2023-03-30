@@ -159,7 +159,7 @@ if [ -z "${OMV_BACKUP_ZSTD_OPTIONS}" ]; then
 	if [ ${threads} -eq 1 ]; then # Toaster mode!
 		OMV_BACKUP_ZSTD_OPTIONS="--fast=5"
 	else
-		OMV_BACKUP_ZSTD_OPTIONS="-T0 --adapt"
+		OMV_BACKUP_ZSTD_OPTIONS="-T0 --long"
 	fi
 fi
 
