@@ -1,5 +1,8 @@
 name: 'Build a test package'
-on: [pull_request]
+on:
+  pull_request:
+  push:
+    branches: [ stable, testing ]
 jobs:
   build:
     runs-on: ubuntu-latest
