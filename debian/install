@@ -1,3 +1,4 @@
 etc/* etc
 usr/sbin/* usr/sbin
 usr/share/openmediavault/* usr/share/openmediavault
+srv/salt/omv/deploy/omv-backup/* srv/salt/omv/deploy/omv-backup

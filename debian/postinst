@@ -9,7 +9,7 @@ case "$1" in
     configure)
         # Activate package triggers.
         dpkg-trigger update-workbench
-
+		omv-salt stage run --quiet prepare
         # Initialize and migrate configuration database.
         echo "Updating configuration database ..."
         omv-confdbadm create "conf.system.backup"
