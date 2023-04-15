@@ -16,12 +16,7 @@
 
 declare -i esp=0
 
-OMV_BACKUP_DIR_NAME=${OMV_BACKUP_DIR_NAME:-"omvbackup"}
-OMV_BACKUP_FILE_PREFIX=${OMV_BACKUP_FILE_PREFIX:-"backup-omv"}
-OMV_BACKUP_MAX_DEPTH=${OMV_BACKUP_MAX_DEPTH:-"1"}
-
-# TODO: Use Salt instead
-OMV_BACKUP_FSA_COMP_LEVEL=${OMV_BACKUP_FSA_COMP_LEVEL:-"2"}
+# ? Possible to use Saltstack
 threads=$(nproc --all)
 arch=$(uname -m)
 
@@ -161,7 +156,7 @@ if [ -z "${OMV_BACKUP_ZSTD_OPTIONS}" ]; then
 		OMV_BACKUP_ZSTD_OPTIONS="--fast=5"
 	elif [ "${arch}" = "armv7l" ]; then
 		OMV_BACKUP_ZSTD_OPTIONS="-T0 --fast"
-	elif [ -v OMV_BACKUP_ZSTD_ADAPT ] && [ ${OMV_BACKUP_ZSTD_ADAPT} -eq 1 ]; then
+	elif [ ${OMV_BACKUP_ZSTD_ADAPT} -eq 1 ]; then
 		OMV_BACKUP_ZSTD_OPTIONS="-T0 --adapt --long"
 	else
 		OMV_BACKUP_ZSTD_OPTIONS="-T0 --long"
