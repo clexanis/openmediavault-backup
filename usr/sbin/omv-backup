@@ -180,6 +180,7 @@ if [ "${part_type}" = "gpt" ]; then
         esppart="${root}${partletter}${esp}"
         _log "ESP partition :: ${esppart}"
         if [ -e "${esppart}" ]; then
+            fstrim /boot/efi
             _log "Backup ESP partition"
             zstd ${OMV_BACKUP_ZSTD_OPTIONS} -o "${backupDir}/${OMV_BACKUP_FILE_PREFIX}-${date}.espdd.zst" <"${esppart}"
             if [ $? -eq 0 ]; then
@@ -246,6 +247,7 @@ fi
 # perform backup based on method selected
 case ${method} in
     dd)
+		fstrim /
         _log "Starting dd backup..."
         zstd ${OMV_BACKUP_ZSTD_OPTIONS} -v -o "${backupDir}/${OMV_BACKUP_FILE_PREFIX}-${date}.dd.zst" <"${devicefile}"
         status=$?
@@ -258,6 +260,7 @@ case ${method} in
         fi
         sync
         if [ -n "${bootpart}" ]; then
+			fstrim /boot/
             _log "Starting dd backup of boot partition..."
             zstd ${OMV_BACKUP_ZSTD_OPTIONS} -o "${backupDir}/${OMV_BACKUP_FILE_PREFIX}-${date}_boot.dd.zst" <"${bootpart}"
             if [ $? -eq 0 ]; then
@@ -273,6 +276,9 @@ case ${method} in
         ;;
 
     ddfull)
+		for i in $(lsblk -n -o MOUNTPOINT ${root}); do
+            fstrim $i
+        done
         _log "Starting dd full disk..."
         zstd ${OMV_BACKUP_ZSTD_OPTIONS} -v -o "${backupDir}/${OMV_BACKUP_FILE_PREFIX}-${date}.ddfull.zst" <"${root}"
         status=$?
