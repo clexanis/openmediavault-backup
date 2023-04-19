@@ -152,9 +152,9 @@ fi
 # ? Possible to use Saltstack
 # zstd options
 if [ -z "${OMV_BACKUP_ZSTD_OPTIONS}" ]; then
-	if [ "${threads}" -eq 1 ] && [ "${arch}" = "armv7l" ]; then
+	if [ "${threads}" -eq 1 ] && [[ "${arch}" = "armv"* ]]; then
 		OMV_BACKUP_ZSTD_OPTIONS="--fast=5"
-	elif [ "${arch}" = "armv7l" ]; then
+	elif [[ "${arch}" = "armv"* ]]; then
 		OMV_BACKUP_ZSTD_OPTIONS="-T0 --fast"
 	elif [ ${OMV_BACKUP_ZSTD_ADAPT} -eq 1 ]; then
 		OMV_BACKUP_ZSTD_OPTIONS="-T0 --adapt --long"
