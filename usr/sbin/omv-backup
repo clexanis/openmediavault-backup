@@ -15,8 +15,6 @@
 . /usr/share/openmediavault/scripts/helper-functions
 
 declare -i esp=0
-
-# ? Possible to use Saltstack
 threads=$(nproc --all)
 arch=$(uname -m)
 
@@ -149,18 +147,17 @@ else
     _log_warning "Save of package list failed!"
 fi
 
-# ? Possible to use Saltstack
-# zstd options
+# zstd profile selector
 if [ -z "${OMV_BACKUP_ZSTD_OPTIONS}" ]; then
-	if [ "${threads}" -eq 1 ] && [[ "${arch}" = "armv"* ]]; then
-		OMV_BACKUP_ZSTD_OPTIONS="--fast=5"
-	elif [[ "${arch}" = "armv"* ]]; then
-		OMV_BACKUP_ZSTD_OPTIONS="-T0 --fast"
-	elif [ ${OMV_BACKUP_ZSTD_ADAPT} -eq 1 ]; then
-		OMV_BACKUP_ZSTD_OPTIONS="-T0 --adapt --long"
-	else
-		OMV_BACKUP_ZSTD_OPTIONS="-T0 --long"
-	fi
+    if [ "${threads}" -eq 1 ] && [[ "${arch}" = "armv"* ]]; then
+        OMV_BACKUP_ZSTD_OPTIONS="--fast=5"
+    elif [[ "${arch}" = "armv"* ]]; then
+        OMV_BACKUP_ZSTD_OPTIONS="-T0 --fast"
+    elif [ ${OMV_BACKUP_ZSTD_ADAPT} -eq 1 ]; then
+        OMV_BACKUP_ZSTD_OPTIONS="-T0 --adapt --long"
+    else
+        OMV_BACKUP_ZSTD_OPTIONS="-T0 --long"
+    fi
 fi
 
 # calculate partition table size to accommodate GPT and MBR.
@@ -247,12 +244,11 @@ fi
 # perform backup based on method selected
 case ${method} in
     dd)
-		fstrim /
+        fstrim /
         _log "Starting dd backup..."
         zstd ${OMV_BACKUP_ZSTD_OPTIONS} -v -o "${backupDir}/${OMV_BACKUP_FILE_PREFIX}-${date}.dd.zst" <"${devicefile}"
-        status=$?
-        _log "zstd exit code = ${status}"
-        if [[ ${status} -gt 0 ]]; then
+        if [[ $? -gt 0 ]]; then
+            _log_error "zstd exit code = $?"
             _log_error "dd backup failed!"
             exit 14
         else
@@ -260,12 +256,13 @@ case ${method} in
         fi
         sync
         if [ -n "${bootpart}" ]; then
-			fstrim /boot/
+            fstrim /boot/
             _log "Starting dd backup of boot partition..."
             zstd ${OMV_BACKUP_ZSTD_OPTIONS} -o "${backupDir}/${OMV_BACKUP_FILE_PREFIX}-${date}_boot.dd.zst" <"${bootpart}"
             if [ $? -eq 0 ]; then
                 _log "dd backup of boot partition complete."
             else
+                _log_error "zstd exit code = $?"
                 _log_error "dd backup of boot partition failed!"
                 exit 15
             fi
@@ -276,14 +273,13 @@ case ${method} in
         ;;
 
     ddfull)
-		for i in $(lsblk -n -o MOUNTPOINT ${root}); do
+        for i in $(lsblk -n -o MOUNTPOINT ${root}); do
             fstrim $i
         done
         _log "Starting dd full disk..."
         zstd ${OMV_BACKUP_ZSTD_OPTIONS} -v -o "${backupDir}/${OMV_BACKUP_FILE_PREFIX}-${date}.ddfull.zst" <"${root}"
-        status=$?
-        _log "zstd exit code = ${status}"
-        if [[ ${status} -gt 0 ]]; then
+        if [[ $? -gt 0 ]]; then
+            _log_error "zstd exit code = $?"
             _log_error "dd full disk backup failed!"
             exit 16
         else
