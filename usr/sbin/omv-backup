@@ -104,7 +104,6 @@ _log "Method: ${method}"
 
 # get device file for /
 devicefile=$(awk '$5 == "/" { print $10 }' /proc/self/mountinfo)
-_log "Device file:  ${devicefile}"
 
 # try alternate method to get root device if /dev/root is returned
 if [ "${devicefile}" = "/dev/root" ]; then
@@ -115,6 +114,7 @@ if [ "${devicefile}" = "/dev/root" ] || [ -z "${devicefile}" ]; then
     _log_error "Could not determine root device file. Please specify in the root device textbox. Exiting..."
     exit 12
 fi
+_log "Device file:  ${devicefile}"
 
 # get root device
 root=$(omv_config_get "/config/system/backup/root")
