@@ -390,15 +390,15 @@ data:
         value: 'root'
       - type: hidden
         name: command
-        value: '/usr/sbin/omv-backup'
+        value: '/usr/sbin/omv-backup 1> /dev/null'
       - type: hidden
         name: type
         value: 'userdefined'
       - type: checkbox
         name: sendemail
-        label: _('Send command output via email')
+        label: _('Send error output via email')
         value: false
-        hint: _('An email message with the command output (if any produced) is send to the user who performs the job.')
+        hint: _('An email message with the error output (if any produced) is send to the user who performs the job.')
       - type: textInput
         name: comment
         label: _('Comment')
