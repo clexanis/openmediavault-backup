@@ -20,7 +20,7 @@ jobs:
           docker-image: debian:bullseye-slim
       - name: 'Upload artifacts'
         id: upload
-        uses: actions/upload-artifact@v3.1.2
+        uses: actions/upload-artifact@v3.1.3
         with:
           name: package
           path: debian/artifacts
